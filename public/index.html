@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Employee Directory</title>
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+<body ng-controller="mainController">
+    <div class="container container-fluid">
+        <div class="jumbotron">
+            <h1>Employee Directory</h1>
+        </div>
+        <h1>Add employees</h1>
+        <hr>
+        <form id='employee-form' class="form-inline" ng-submit="addEmployee()">
+            <input type="text" ng-model="employee.name" class="form-control" placeholder="Name" required>
+            <input type="email" ng-model="employee.email" class="form-control" placeholder="Email" required>
+            <input type="text" ng-model="employee.dob" class="form-control" placeholder="Date-of-birth" required onfocus="(this.type='date')" onblur="(this.type='text')">
+            <input type="text" ng-model="employee.dept" class="form-control" placeholder="Department" required>
+            <select type="text" ng-model="employee.gender" class="form-control"  placeholder="Gender" required>
+                <option value="" disabled selected>Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+            </select>
+            <button ng-show = "!update" type = "submit" class="btn btn-success">Save</button>
+            <button ng-show = "update" type = "submit" class="btn btn-primary">Update</button>
+        </form>
+        <h1>Employee's List</h1>
+        <hr>
+        <p ng-show="!employees">No employee data available</p>
+        <div ng-show="employees">
+                <table class="table">
+                        <thead>
+                            <tr>
+                                <td>Name</td>
+                                <td>Email</td>
+                                <td>Date of Birth</td>
+                                <td>Department</td>
+                                <td>Gender</td>
+                                <td>Age (yrs)</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="employee in employees">
+                                <td>{{employee.name}}</td>
+                                <td>{{employee.email}}</td>
+                                <td>{{employee.dob | date:'yyyy-MM-dd'}}</td>
+                                <td>{{employee.dept}}</td>
+                                <td>{{employee.gender}}</td>
+                                <td>{{employee.age}}</td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm" ng-click="removeEmployee(employee.id)">Delete</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm" ng-click="editEmployee(employee.id)">Edit</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+        </div>
+        
+    </div>
+
+
+
+
+    <script src="jquery/dist/jquery.min.js"></script>
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>
